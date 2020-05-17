@@ -1,0 +1,32 @@
+###############################################################
+#
+# 	Configurações gerais da aplicação.
+#
+# 	As configurações são sobrepostas pelas feitas nos arquivos
+#	de configuração dos ambientes.
+#
+###############################################################
+
+spring:
+  profiles:
+    active:
+#      ${TRADINGSYSTEM_AMBIENTE}
+      dev_embedded
+      #dev
+      #hom
+      #prod
+  data:
+    rest:
+      base-path: /data
+  jackson:
+    serialization:
+      indent-output: true
+    serealization-inclusion: non_null
+
+management:
+  context-path: /manage
+  
+proxy:
+  host:
+  port: 
+

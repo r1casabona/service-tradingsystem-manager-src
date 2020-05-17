@@ -1,0 +1,50 @@
+###############################################################
+#
+# 	Configurações gerais da aplicação.
+#
+# 	As configurações são sobrepostas pelas feitas nos arquivos
+#	de configuração dos ambientes.
+#
+###############################################################
+
+server:
+  port: 8081
+
+base:
+  path: /tradingsystemmanager/v1
+  
+spring: 
+  data:
+    rest:
+      base-path: /data
+  jackson:
+    serialization:
+      indent-output: true
+    serealization-inclusion: non_null
+#  jta:
+#    enable: true
+#  jpa:
+#    database: default
+#    generate-ddl: true
+#    show-sql: false
+#  datasource:
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    jdbc-url:
+##      jdbc:sqlserver://172.29.21.35:1433;databaseName=BR_TD_BRADESCOV3 # DEV
+##      jdbc:sqlserver://172.29.21.35:1433;databaseName=BR_TD_BRADESCOV3 # HOM
+#      jdbc:sqlserver://172.29.20.35:1433;databaseName=BR_TD_BRADESCOV3 # PROD
+#    username:
+##      sa # DEV
+##      interadapt # HOM
+#      sa # PROD
+#    password:
+##      Telefonica@15 # DEV
+##      @tivo2013@ # HOM
+#      Telefonica@15 # PROD
+#    hikari:
+#      pool-name:
+#        arcos
+
+tradingsystem:
+  limite: 20000000.00
+  risco: 0.05
