@@ -7,10 +7,9 @@ import java.math.BigDecimal;
 public interface Ativo {
     /**
      * retorna o valor do ponto
-     * @param trading
      * @return
      */
-    BigDecimal valorPorPonto(Trading trading);
+    BigDecimal valorPorPonto();
 
     /**
      * retorna a quantidade de pontos entre uma entrada e uma saida

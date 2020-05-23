@@ -1,9 +1,12 @@
 package br.com.mrxfocus.tradingsystemmanager.service.api.component.regra;
 
+import br.com.mrxfocus.tradingsystemmanager.service.api.component.ativo.WIN;
 import br.com.mrxfocus.tradingsystemmanager.service.api.model.ConfiguracoesDaConta;
 import br.com.mrxfocus.tradingsystemmanager.service.api.model.Trading;
 import br.com.mrxfocus.tradingsystemmanager.service.api.component.ativo.Ativo;
 import br.com.mrxfocus.tradingsystemmanager.service.api.component.ativo.WDO;
+import br.com.mrxfocus.tradingsystemmanager.service.api.service.PontoService;
+import br.com.mrxfocus.tradingsystemmanager.service.api.service.impl.PontoServiceImpl;
 
 import java.math.BigDecimal;
 
@@ -19,11 +22,11 @@ public class StopEstaDentroDoAceitavelRegra extends Regra {
     @Override
     public boolean valida(Trading trading, ConfiguracoesDaConta configuracoesDaConta) {
         // se for um movimento Altista o Stop deve ser menor que a Entrada
-        if ( "ALTISTA".equals(trading.getMovimento()) ) {
+        if ("ALTISTA".equals(trading.getMovimento())) {
             // valida se o valor so stop esta dentro do limete paramitrizado
             if (this.limiteValidoDeStop(trading, configuracoesDaConta)) {
                 // compara se o Stop é menor que a Entrada
-                if ( trading.getStop().compareTo(trading.getEntrada()) == -1 ) {
+                if (trading.getStop().compareTo(trading.getEntrada()) == -1) {
                     return validaOutraRegra(trading, configuracoesDaConta);
                 }
             }
@@ -31,7 +34,7 @@ public class StopEstaDentroDoAceitavelRegra extends Regra {
             // valida se o valor so stop esta dentro do limete paramitrizado
             if (this.limiteValidoDeStop(trading, configuracoesDaConta)) {
                 // compara se o Stop é maior que a Entrada
-                if ( trading.getStop().compareTo(trading.getEntrada()) == 1 ) {
+                if (trading.getStop().compareTo(trading.getEntrada()) == 1) {
                     return validaOutraRegra(trading, configuracoesDaConta);
                 }
             }
@@ -41,6 +44,7 @@ public class StopEstaDentroDoAceitavelRegra extends Regra {
 
     /**
      * valida se o stop representa o percentual estipulado para o trading
+     *
      * @param trading
      * @return
      */
@@ -52,8 +56,8 @@ public class StopEstaDentroDoAceitavelRegra extends Regra {
         BigDecimal valorDoStop = quantidadeDePontosEntreAEntradaEOStop.multiply(valorDoPonto);
 
         // valor do stop deve ser igual ou menor que percentual
-        if ( valorDoStop.compareTo(valorPercentual) == 0 ||
-                valorDoStop.compareTo(valorPercentual) == -1 ) {
+        if (valorDoStop.compareTo(valorPercentual) == 0 ||
+                valorDoStop.compareTo(valorPercentual) == -1) {
             return true;
         }
 
@@ -62,17 +66,18 @@ public class StopEstaDentroDoAceitavelRegra extends Regra {
 
     // calcula a quantidade de pontos entre a entrada e o stop
     private BigDecimal calculaAQuantidadeDePontosEntreAEntradaEASaida(Trading trading) {
-        Ativo wdo = new WDO();
-        return wdo.quantidadeDePontos( trading.getEntrada(), trading.getStop() );
+        PontoService pontoService = new PontoServiceImpl();
+        return pontoService.quantidadeDePontosDaEntradaAteASaida(trading);
     }
 
     /**
      * retorna o valor do ponto de acordo como ativo que foi informado no trading
+     *
      * @param trading
      * @return
      */
     protected BigDecimal valorDoPonto(Trading trading) {
-        Ativo wdo = new WDO();
-        return wdo.valorPorPonto(trading);
+        PontoService pontoService = new PontoServiceImpl();
+        return pontoService.valorDoPonto(trading);
     }
 }

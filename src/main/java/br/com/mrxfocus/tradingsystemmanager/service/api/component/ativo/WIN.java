@@ -4,10 +4,10 @@ import br.com.mrxfocus.tradingsystemmanager.service.api.model.Trading;
 
 import java.math.BigDecimal;
 
-public class WDO implements Ativo {
+public class WIN implements Ativo {
     @Override
     public BigDecimal valorPorPonto() {
-        return new BigDecimal(10);
+        return new BigDecimal(0.20);
     }
 
     @Override

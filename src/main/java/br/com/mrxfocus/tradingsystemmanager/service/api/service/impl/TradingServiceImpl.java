@@ -1,9 +1,6 @@
 package br.com.mrxfocus.tradingsystemmanager.service.api.service.impl;
 
-import br.com.mrxfocus.tradingsystemmanager.service.api.component.regra.AltistaRegra;
-import br.com.mrxfocus.tradingsystemmanager.service.api.component.regra.BaixistaRegra;
-import br.com.mrxfocus.tradingsystemmanager.service.api.component.regra.Regra;
-import br.com.mrxfocus.tradingsystemmanager.service.api.component.regra.StopEstaDentroDoAceitavelRegra;
+import br.com.mrxfocus.tradingsystemmanager.service.api.component.regra.*;
 import br.com.mrxfocus.tradingsystemmanager.service.api.config.Initializer;
 import br.com.mrxfocus.tradingsystemmanager.service.api.model.ConfiguracoesDaConta;
 import br.com.mrxfocus.tradingsystemmanager.service.api.model.Trading;
@@ -49,7 +46,7 @@ public class TradingServiceImpl implements TradingService {
      * @return
      */
     private Regra regrasQueSeraoAplicadasNoTrading() {
-        return new AltistaRegra(new BaixistaRegra(new StopEstaDentroDoAceitavelRegra()));
+        return new AltistaRegra(new BaixistaRegra(new StopEstaDentroDoAceitavelRegra(new GainEstaDentroDoAceitavelRegra())));
     }
 
     private RespostaTradingResponse mountResponse(Boolean autorizado) {
